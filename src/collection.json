@@ -4,6 +4,13 @@
     "matt": {
       "description": "A blank schematic.",
       "factory": "./my-schematics/index#mySchematics"
+    },
+    "sam": {
+      "alias": ["s"],
+      "description": "A blank schematic.",
+      "factory": "./sam/index",
+      "schema": "./sam/schema.json"
     }
-  }
+  },
+  "required": []
 }
