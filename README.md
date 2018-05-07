@@ -69,3 +69,7 @@ https://github.com/angular/devkit/blob/master/packages/angular_devkit/core/src/u
 
 Rules/base
 https://github.com/angular/devkit/blob/master/packages/angular_devkit/schematics/src/rules/base.ts
+
+Angular CLI `ng new APP_NAME`
+
+https://github.com/angular/devkit/blob/master/packages/schematics/angular/application/index.ts

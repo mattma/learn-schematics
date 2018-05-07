@@ -1,5 +1,4 @@
 import { strings, basename, Path, dirname, normalize } from '@angular-devkit/core';
-
 import {
   Rule, SchematicContext, Tree,
   url, apply,
