@@ -49,7 +49,7 @@ npm run build
 
 npm link
 
-schematics my-schematics:sam awesome-sir --path dist
+schematics my-schematics:sam awesome-sir --path dist --dry-run
 ```
 
 ## Use inside Angular CLI project
@@ -59,3 +59,13 @@ npm link my-schematics
 
 ng g my-schematics:sam awesome-sause -c my-schematics --path dist
 ```
+
+## API docs
+
+https://github.com/angular/devkit/tree/master/packages/angular_devkit/schematics
+
+String methods
+https://github.com/angular/devkit/blob/master/packages/angular_devkit/core/src/utils/strings.ts
+
+Rules/base
+https://github.com/angular/devkit/blob/master/packages/angular_devkit/schematics/src/rules/base.ts
