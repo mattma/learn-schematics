@@ -4,7 +4,7 @@ import {
   Rule, SchematicContext, Tree,
   url, apply,
   move, template, branchAndMerge,
-  chain, mergeWith
+  chain, mergeWith, noop, filter,
 } from '@angular-devkit/schematics';
 
 import { Schema as SamOptions } from './schema';
@@ -58,6 +58,11 @@ export default function(options: SamOptions): Rule {
     // Provided Sources:  `apply(source: Source, rules: Rule[])`
     // apply(): Apply a list of rules to a source, and return the result.
     const templateSource = apply(files, [
+      // noop(): Returns the input Tree as is.
+      //
+      // filter(predicate: FilePredicate<boolean>)
+      // Returns the input Tree with files that do not pass the FilePredicate.
+      options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
       templateRules,
       dest,
     ]);

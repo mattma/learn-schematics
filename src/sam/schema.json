@@ -17,6 +17,17 @@
       "format": "path",
       "description": "path to create the enum",
       "visible": false
+    },
+    "spec": {
+      "type": "boolean",
+      "description": "Specifies if a spec file is generated",
+      "default": false
+    },
+    "type": {
+      "type": "string",
+      "description": "Specifies the type of the thing",
+      "default": ""
     }
-  }
+  },
+  "required": []
 }
