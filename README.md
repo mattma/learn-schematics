@@ -25,4 +25,37 @@ npm publish
 ```
 
 That's it!
- 
+
+## Reading Materials
+
+```
+https://blog.angular.io/schematics-an-introduction-dc1dfbc2a2b2
+
+https://github.com/angular/devkit/tree/master/packages/schematics/angular/enum
+```
+
+## Transform JSON2TS
+
+```
+https://www.npmjs.com/package/json-schema-to-typescript
+
+./node_modules/.bin/json2ts src/sam/schema.json > src/sam/schema.d.ts
+```
+
+## Build the project
+
+```
+npm run build
+
+npm link
+
+schematics my-schematics:sam awesome-sir --path dist
+```
+
+## Use inside Angular CLI project
+
+```
+npm link my-schematics
+
+ng g my-schematics:sam awesome-sause -c my-schematics --path dist
+```

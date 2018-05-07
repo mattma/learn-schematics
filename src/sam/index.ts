@@ -37,12 +37,10 @@ export default function(options: SamOptions): Rule {
     });
     const dest = move(parsedPath.path);
 
-    const templateSource = apply(
-      files, [
-        templateUtils,
-        dest,
-      ]
-    )
+    const templateSource = apply(files, [
+      templateUtils,
+      dest,
+    ]);
 
     return chain([
       branchAndMerge(
