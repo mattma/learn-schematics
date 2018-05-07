@@ -6,6 +6,39 @@ import {
   chain, mergeWith, noop, filter,
 } from '@angular-devkit/schematics';
 
+/**
+ * import { externalSchematic } from '@angular-devkit/schematics';
+ *
+ * externalSchematic:  Run a schematic from a separate collection.
+ * @param collectionName The name of the collection that contains the schematic to run.
+ * @param schematicName The name of the schematic to run.
+ * @param options The options to pass as input to the RuleFactory.
+ * externalSchematic(collectionName: string, schematicName: string, options: OptionT): Rule;
+ *
+ * ex:
+ * externalSchematic('@schematics/angular', 'service-worker', options)(host, context);
+ */
+
+/**
+ * import { schematic } from '@angular-devkit/schematics';
+ *
+ * schematic: Run a schematic from the same collection.
+ * @param schematicName The name of the schematic to run.
+ * @param options The options to pass as input to the RuleFactory.
+ * schematic<OptionT extends object>(schematicName: string, options: OptionT): Rule;
+ *
+ * ex:
+ *    schematic('component', {
+        name: 'app',
+        selector: appRootSelector,
+        flat: true,
+        path: sourceDir,
+        skipImport: true,
+        project: options.name,
+        ...componentOptions,
+      }),
+ */
+
 import { Schema as SamOptions } from './schema';
 
 export interface Location {
