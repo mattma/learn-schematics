@@ -4,6 +4,7 @@
   "description": "A blank schematics",
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "clean": "rimraf node_modules dist src/**/*.js src/**/*.js.map npm-debug.log",
     "test": "npm run build && jasmine **/*_spec.js"
   },
   "keywords": [
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@angular-devkit/schematics": "^0.6.0",
-    "json-schema-to-typescript": "^5.5.0"
+    "json-schema-to-typescript": "^5.5.0",
+    "rimraf": "^2.6.2"
   }
 }

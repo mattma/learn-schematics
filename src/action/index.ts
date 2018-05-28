@@ -8,23 +8,15 @@ import {
 import {
   Rule,
   SchematicsException,
-  apply,
   branchAndMerge,
   chain,
-  template,
-  url,
   Tree,
-  SchematicContext
+  SchematicContext,
 } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 
 import { Schema as ActionOptions } from './schema';
 import { InsertChange } from '../utils/change';
-// import {
-//   addDeclarationToModule
-//   // addEntryComponentToModule,
-//   // addExportToModule
-// } from './ast';
 
 export interface Location {
   name: string;
@@ -39,6 +31,29 @@ export function parseName(path: string, name: string): Location {
     name: nameWithoutPath,
     path: normalize('/' + namePath)
   };
+}
+
+/**
+ * Get all the nodes from a source.
+ * @param sourceFile The source file object.
+ * @returns {Observable<ts.Node>} An observable of all the nodes in the source.
+ */
+export function getSourceNodes(sourceFile: ts.SourceFile): ts.Node[] {
+  const nodes: ts.Node[] = [sourceFile];
+  const result = [];
+
+  while (nodes.length > 0) {
+    const node = nodes.shift();
+
+    if (node) {
+      result.push(node);
+      if (node.getChildCount(sourceFile) >= 0) {
+        nodes.unshift(...node.getChildren());
+      }
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -114,16 +129,21 @@ function readIntoSourceFile(host: Tree, modulePath: string): ts.SourceFile {
   );
 }
 
+const getContent = (options: ActionOptions) => {
+  const routeName = strings.dasherize(options.name);
+  const fnName = strings.classify(options.name);
+  return `
+@app.route('${routeName}')
+def ${fnName}():
+  response = Response(
+    json.dumps(${routeName}), status=200, mimetype=JSON_MIME_TYPE)
+  return response
+`;
+};
+
 function fileUpdate(options: ActionOptions): Rule {
   return (tree: Tree) => {
-    // Get from files template
-    const files = url('./files');
-    const templateRules = template({
-      ...strings,
-      ...(options as object)
-    } as any);
-    const templateSource = apply(files, [templateRules]);
-
+    const toInsert = getContent(options);
 
     // Commit into the source
     // Get the content of input source file (options.path)
@@ -134,8 +154,6 @@ function fileUpdate(options: ActionOptions): Rule {
     if (!lastItem) {
       throw new Error();
     }
-
-    const toInsert = 'matt m \n';
 
     const contentChange = new InsertChange(modulePath, lastItem.getEnd(), toInsert);
     const recorder = tree.beginUpdate(modulePath);
