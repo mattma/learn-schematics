@@ -1,9 +1,5 @@
 import {
-  strings,
-  basename,
-  Path,
-  dirname,
-  normalize,
+  strings
 } from '@angular-devkit/core';
 import {
   Rule,
@@ -17,21 +13,7 @@ import * as ts from 'typescript';
 
 import { Schema as ActionOptions } from './schema';
 import { InsertChange } from '../utils/change';
-
-export interface Location {
-  name: string;
-  path: Path;
-}
-
-export function parseName(path: string, name: string): Location {
-  const nameWithoutPath = basename(name as Path);
-  const namePath = dirname((path + '/' + name) as Path);
-
-  return {
-    name: nameWithoutPath,
-    path: normalize('/' + namePath)
-  };
-}
+import { parseName } from '../utils/parse-name';
 
 /**
  * Find all nodes from the AST in the subtree of node of SyntaxKind kind.

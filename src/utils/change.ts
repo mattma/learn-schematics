@@ -1,3 +1,5 @@
+// Import from https://github.com/angular/devkit/blob/master/packages/schematics/angular/utility/change.ts
+
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.

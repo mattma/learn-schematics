@@ -1,10 +1,12 @@
-import { strings, basename, Path, dirname, normalize } from '@angular-devkit/core';
+import { strings } from '@angular-devkit/core';
 import {
   Rule, SchematicContext, Tree,
   url, apply,
   move, template, branchAndMerge,
   chain, mergeWith, noop, filter,
 } from '@angular-devkit/schematics';
+
+import { parseName } from '../utils/parse-name';
 
 /**
  * import { externalSchematic } from '@angular-devkit/schematics';
@@ -40,21 +42,6 @@ import {
  */
 
 import { Schema as SamOptions } from './schema';
-
-export interface Location {
-  name: string;
-  path: Path;
-}
-
-export function parseName(path: string, name: string): Location {
-  const nameWithoutPath = basename(name as Path);
-  const namePath = dirname((path + '/' + name) as Path);
-
-  return {
-    name: nameWithoutPath,
-    path: normalize('/' + namePath),
-  };
-}
 
 // Function returns a Rule, which is a transformation from a Tree to another Tree.
 
