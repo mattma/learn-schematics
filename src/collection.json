@@ -17,6 +17,11 @@
       "description": "A flask schematic.",
       "factory": "./flask/index",
       "schema": "./flask/schema.json"
+    },
+    "api": {
+      "description": "A flask schematic.",
+      "factory": "./action/index",
+      "schema": "./action/schema.json"
     }
   },
   "required": []

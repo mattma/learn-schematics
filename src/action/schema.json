@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "action",
+  "title": "python api incremental",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the action.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "The path to create the component.",
+      "visible": false
+    },
+    "type": {
+      "type": "string",
+      "description": "The path to create the component.",
+      "visible": false
+    }
+  },
+  "required": []
+}
