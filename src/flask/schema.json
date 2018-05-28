@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "flask",
+  "title": "flask schematics",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "api file name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "path to create the name",
+      "visible": false
+    },
+    "type": {
+      "type": "string",
+      "description": "Specifies the type of the thing",
+      "default": ""
+    }
+  },
+  "required": []
+}

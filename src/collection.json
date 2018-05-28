@@ -1,5 +1,6 @@
 {
-  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "$schema":
+    "../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "matt": {
       "description": "A blank schematic.",
@@ -10,6 +11,12 @@
       "description": "A blank schematic.",
       "factory": "./sam/index",
       "schema": "./sam/schema.json"
+    },
+    "flask": {
+      "alias": ["f"],
+      "description": "A flask schematic.",
+      "factory": "./flask/index",
+      "schema": "./flask/schema.json"
     }
   },
   "required": []
