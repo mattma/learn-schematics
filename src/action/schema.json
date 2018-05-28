@@ -17,11 +17,6 @@
       "format": "path",
       "description": "The path to create the component.",
       "visible": false
-    },
-    "type": {
-      "type": "string",
-      "description": "The path to create the component.",
-      "visible": false
     }
   },
   "required": []

@@ -13,17 +13,8 @@ import * as ts from 'typescript';
 
 import { Schema as ActionOptions } from './schema';
 
-import { InsertChange } from '../utils/change';
-import { findNodes } from '../utils/ast-utils';
+import { findNodes, insertAfterLastOccurrence } from '../utils/ast-utils';
 import { parseName } from '../utils/parse-name';
-
-/**
- * Helper for sorting nodes.
- * @return function to sort nodes in increasing order of position in sourceFile
- */
-function nodesByPosition(first: ts.Node, second: ts.Node): number {
-  return first.getStart() - second.getStart();
-}
 
 function readIntoSourceFile(host: Tree, modulePath: string): ts.SourceFile {
   const text = host.read(modulePath);
@@ -61,18 +52,17 @@ function fileUpdate(options: ActionOptions): Rule {
     // Get the content of input source file (options.path)
     const modulePath = `${(<{ path: string }>options).path}`;
     const source = readIntoSourceFile(tree, modulePath);
+    // Get All nodes from modulePath
     const nodes = findNodes(source, ts.SyntaxKind.EndOfFileToken);
 
-    const lastItem = nodes.sort(nodesByPosition).pop();
-    if (!lastItem) {
-      throw new Error();
-    }
+    // Insert the last Occurrence
+    const contentChange: any = insertAfterLastOccurrence(nodes, toInsert, modulePath, 0);
 
-    const contentChange = new InsertChange(modulePath, lastItem.getEnd(), toInsert);
+    // Create recoderer and prepare for the updates
     const recorder = tree.beginUpdate(modulePath);
-
+    // Insert the content into recorder
     recorder.insertLeft(contentChange.pos, contentChange.toAdd);
-
+    // Commit the actual changes
     tree.commitUpdate(recorder);
 
     return tree;

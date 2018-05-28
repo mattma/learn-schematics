@@ -7,9 +7,5 @@ export interface Schema {
      * The path to create the component.
      */
     path?: string;
-    /**
-     * Specifies the type of the thing
-     */
-    type?: string;
     [k: string]: any;
 }
