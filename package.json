@@ -4,7 +4,8 @@
   "description": "A blank schematics",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "clean": "rimraf node_modules dist src/**/*.js src/**/*.js.map npm-debug.log",
+    "clean": "rimraf node_modules npm-debug.log && npm run clean:source",
+    "clean:source": "rimraf dist src/**/*.js src/**/*.js.map src/**/*.d.ts",
     "test": "npm run build && jasmine **/*_spec.js"
   },
   "keywords": [

@@ -34,29 +34,6 @@ export function parseName(path: string, name: string): Location {
 }
 
 /**
- * Get all the nodes from a source.
- * @param sourceFile The source file object.
- * @returns {Observable<ts.Node>} An observable of all the nodes in the source.
- */
-export function getSourceNodes(sourceFile: ts.SourceFile): ts.Node[] {
-  const nodes: ts.Node[] = [sourceFile];
-  const result = [];
-
-  while (nodes.length > 0) {
-    const node = nodes.shift();
-
-    if (node) {
-      result.push(node);
-      if (node.getChildCount(sourceFile) >= 0) {
-        nodes.unshift(...node.getChildren());
-      }
-    }
-  }
-
-  return result;
-}
-
-/**
  * Find all nodes from the AST in the subtree of node of SyntaxKind kind.
  * @param node
  * @param kind
@@ -91,20 +68,6 @@ export function findNodes(node: ts.Node, kind: ts.SyntaxKind, max = Infinity): t
   return arr;
 }
 
-export function findNode(node: ts.Node, kind: ts.SyntaxKind, text: string): ts.Node | null {
-  if (node.kind === kind && node.getText() === text) {
-    // throw new Error(node.getText());
-    return node;
-  }
-
-  let foundNode: ts.Node | null = null;
-  ts.forEachChild(node, childNode => {
-    foundNode = foundNode || findNode(childNode, kind, text);
-  });
-
-  return foundNode;
-}
-
 /**
  * Helper for sorting nodes.
  * @return function to sort nodes in increasing order of position in sourceFile
@@ -131,9 +94,9 @@ function readIntoSourceFile(host: Tree, modulePath: string): ts.SourceFile {
 
 const getContent = (options: ActionOptions) => {
   const routeName = strings.dasherize(options.name);
-  const fnName = strings.classify(options.name);
+  const fnName = strings.underscore(options.name);
   return `
-@app.route('${routeName}')
+@app.route('/${routeName}')
 def ${fnName}():
   response = Response(
     json.dumps(${routeName}), status=200, mimetype=JSON_MIME_TYPE)

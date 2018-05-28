@@ -3,18 +3,19 @@
  * DO NOT MODIFY IT BY HAND. Instead, modify the source JSONSchema file,
  * and run json-schema-to-typescript to regenerate this file.
  */
+
 export interface Schema {
-    /**
-     * api file name
-     */
-    name?: string;
-    /**
-     * path to create the name
-     */
-    path?: string;
-    /**
-     * Specifies the type of the thing
-     */
-    type?: string;
-    [k: string]: any;
+  /**
+   * api file name
+   */
+  name?: string;
+  /**
+   * path to create the name
+   */
+  path?: string;
+  /**
+   * Specifies the type of the thing
+   */
+  type?: string;
+  [k: string]: any;
 }
