@@ -96,3 +96,9 @@ https://github.com/angular/devkit/blob/master/packages/angular_devkit/schematics
 Angular CLI `ng new APP_NAME`
 
 https://github.com/angular/devkit/blob/master/packages/schematics/angular/application/index.ts
+
+## Research
+
+- [Require flag](https://github.com/nrwl/nx/blob/master/packages/schematics/src/collection/ngrx/schema.json#L45)
+
+- [example generation](https://github.com/nrwl/nx/blob/master/packages/schematics/src/collection/ngrx/ngrx.md#examples)
